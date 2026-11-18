@@ -32,7 +32,7 @@
   <!-- HTTP APIs -->
   <rect x="680" y="90" width="320" height="66" rx="8" fill="#fff" stroke="#2E5C8A" stroke-width="1.5"/>
   <text x="840" y="116" text-anchor="middle" font-size="14" font-weight="600" fill="#1a2a38">HTTP APIs · per-service JWT auth</text>
-  <text x="840" y="134" text-anchor="middle" font-size="11" fill="#5b6b7a">account · recipes · shopping · ask</text>
+  <text x="840" y="134" text-anchor="middle" font-size="11" fill="#5b6b7a">account · recipes · shopping · meal plans · ask</text>
 
   <!-- Cognito -->
   <rect x="208" y="170" width="188" height="38" rx="8" fill="#eef4fa" stroke="#9bb6d2" stroke-width="1.2"/>
@@ -54,7 +54,7 @@
   <rect x="40" y="326" width="150" height="22" rx="6" fill="#fff" stroke="#B5651D"/>
   <text x="115" y="341" text-anchor="middle" font-size="10.5" fill="#1a2a38">Photo · up to 5 pages</text>
   <rect x="40" y="352" width="150" height="22" rx="6" fill="#fff" stroke="#B5651D"/>
-  <text x="115" y="367" text-anchor="middle" font-size="10.5" fill="#1a2a38">URL</text>
+  <text x="115" y="367" text-anchor="middle" font-size="10.5" fill="#1a2a38">URL · browser fallback</text>
   <line x1="190" y1="311" x2="190" y2="363" stroke="#5b6b7a" stroke-width="1.4"/>
   <line x1="190" y1="337" x2="212" y2="337" stroke="#5b6b7a" stroke-width="1.6" marker-end="url(#arrow)"/>
   <text x="201" y="330" text-anchor="middle" font-size="9" fill="#8a7150">import</text>
@@ -67,7 +67,7 @@
   <!-- Step Functions pipeline -->
   <rect x="400" y="302" width="310" height="74" rx="9" fill="#fff" stroke="#B5651D" stroke-width="1.5"/>
   <text x="555" y="322" text-anchor="middle" font-size="12.5" font-weight="600" fill="#B5651D">Step Functions · RecipePipeline</text>
-  <text x="555" y="342" text-anchor="middle" font-size="10.5" fill="#5b6b7a">extract (Bedrock Claude) → validate → render</text>
+  <text x="555" y="342" text-anchor="middle" font-size="10.5" fill="#5b6b7a">extract (Claude Sonnet 5.5) → validate → render</text>
   <text x="555" y="358" text-anchor="middle" font-size="10.5" fill="#5b6b7a">→ banner → save &amp; tag → update index</text>
 
   <!-- S3 + KB -->
@@ -88,58 +88,64 @@
 
   <text x="34" y="390" font-size="10.5" fill="#8a7150">Dispatcher gates per-user concurrency with QUEUED rows (no SQS); on success the pipeline emits an "Import Job Succeeded" event that triggers KB sync.</text>
 
-  <!-- ================= Section 3: Ask / RAG ================= -->
+  <!-- ================= Section 3: Ask on AgentCore ================= -->
   <rect x="16" y="416" width="1008" height="172" rx="14" fill="#eef7f3" stroke="#cae3da"/>
-  <text x="34" y="442" font-size="13" font-weight="700" fill="#1F7A6B">3 · Ask — agentic, streaming RAG</text>
+  <text x="34" y="442" font-size="13" font-weight="700" fill="#1F7A6B">3 · Ask — agentic, streaming assistant (AgentCore Harness + Gateway)</text>
 
-  <rect x="40" y="478" width="150" height="56" rx="8" fill="#fff" stroke="#1F7A6B" stroke-width="1.5"/>
-  <text x="115" y="501" text-anchor="middle" font-size="14" font-weight="600" fill="#1a2a38">ask-api</text>
-  <text x="115" y="518" text-anchor="middle" font-size="11" fill="#5b6b7a">/ask</text>
+  <rect x="40" y="470" width="160" height="56" rx="8" fill="#fff" stroke="#1F7A6B" stroke-width="1.5"/>
+  <text x="120" y="493" text-anchor="middle" font-size="14" font-weight="600" fill="#1a2a38">Ask front</text>
+  <text x="120" y="510" text-anchor="middle" font-size="10.5" fill="#5b6b7a">Lambda · SSE stream</text>
 
-  <rect x="300" y="478" width="220" height="56" rx="8" fill="#fff" stroke="#1F7A6B" stroke-width="1.5"/>
-  <text x="410" y="501" text-anchor="middle" font-size="14" font-weight="600" fill="#1a2a38">Knowledge Base</text>
-  <text x="410" y="518" text-anchor="middle" font-size="11" fill="#5b6b7a">retrieval scoped by userId</text>
+  <rect x="250" y="470" width="190" height="56" rx="8" fill="#fff" stroke="#1F7A6B" stroke-width="1.8"/>
+  <text x="345" y="493" text-anchor="middle" font-size="14" font-weight="600" fill="#1F7A6B">Harness agent</text>
+  <text x="345" y="510" text-anchor="middle" font-size="10.5" fill="#5b6b7a">AgentCore · Claude Sonnet 5.5</text>
 
-  <rect x="620" y="478" width="180" height="56" rx="8" fill="#fff" stroke="#1F7A6B" stroke-width="1.5"/>
-  <text x="710" y="501" text-anchor="middle" font-size="14" font-weight="600" fill="#1a2a38">Ask agent (Strands)</text>
-  <text x="710" y="518" text-anchor="middle" font-size="11" fill="#5b6b7a">Bedrock · Claude Sonnet 4.6</text>
+  <rect x="520" y="470" width="200" height="56" rx="8" fill="#e3f1ec" stroke="#1F7A6B" stroke-width="1.5"/>
+  <text x="620" y="493" text-anchor="middle" font-size="14" font-weight="600" fill="#1a2a38">AgentCore Gateway</text>
+  <text x="620" y="510" text-anchor="middle" font-size="10.5" fill="#5b6b7a">OpenAPI targets · interceptor</text>
 
-  <rect x="840" y="478" width="168" height="56" rx="8" fill="#fff" stroke="#1F7A6B" stroke-width="1.5"/>
-  <text x="924" y="501" text-anchor="middle" font-size="14" font-weight="600" fill="#1a2a38">Response</text>
-  <text x="924" y="518" text-anchor="middle" font-size="11" fill="#5b6b7a">streamed (SSE) + citations</text>
+  <rect x="780" y="470" width="228" height="56" rx="8" fill="#fff" stroke="#1F7A6B" stroke-width="1.5"/>
+  <text x="894" y="493" text-anchor="middle" font-size="14" font-weight="600" fill="#1a2a38">Mealr APIs</text>
+  <text x="894" y="510" text-anchor="middle" font-size="10.5" fill="#5b6b7a">recipes · kb · shopping · meal plans</text>
 
-  <line x1="190" y1="506" x2="298" y2="506" stroke="#5b6b7a" stroke-width="1.6" marker-end="url(#arrow)"/>
-  <text x="244" y="498" text-anchor="middle" font-size="10" fill="#4f8c7e">query + history</text>
-  <line x1="520" y1="506" x2="618" y2="506" stroke="#5b6b7a" stroke-width="1.6" marker-end="url(#arrow)"/>
-  <text x="569" y="498" text-anchor="middle" font-size="10" fill="#4f8c7e">context</text>
-  <line x1="800" y1="506" x2="838" y2="506" stroke="#5b6b7a" stroke-width="1.6" marker-end="url(#arrow)"/>
-  <text x="819" y="498" text-anchor="middle" font-size="10" fill="#4f8c7e">answer</text>
+  <rect x="40" y="534" width="160" height="22" rx="6" fill="#e3f1ec" stroke="#9cc9bb"/>
+  <text x="120" y="549" text-anchor="middle" font-size="10" fill="#1a2a38">AgentCore Memory · Haiku 5.5</text>
 
-  <text x="34" y="566" font-size="11" fill="#5b6b7a">Retrieval is filtered to the caller&#8217;s identity — users only ever see their own recipes; citations are validated against retrieval to prevent hallucinated sources.</text>
+  <line x1="200" y1="498" x2="248" y2="498" stroke="#5b6b7a" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="224" y="490" text-anchor="middle" font-size="9" fill="#4f8c7e">turn</text>
+  <line x1="440" y1="490" x2="518" y2="490" stroke="#5b6b7a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="479" y="484" text-anchor="middle" font-size="10" fill="#4f8c7e">tool_use</text>
+  <line x1="520" y1="508" x2="442" y2="508" stroke="#5b6b7a" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="481" y="520" text-anchor="middle" font-size="10" fill="#4f8c7e">result</text>
+  <line x1="720" y1="498" x2="778" y2="498" stroke="#5b6b7a" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="749" y="490" text-anchor="middle" font-size="9" fill="#4f8c7e">user&#8217;s token</text>
+
+  <text x="34" y="570" font-size="11" fill="#5b6b7a">Tools are the APIs&#8217; own OpenAPI specs (no tool code). The interceptor forwards the user&#8217;s token and forces ownerSub, location and units,</text>
+  <text x="34" y="584" font-size="11" fill="#5b6b7a">so a prompt-injected model can&#8217;t choose whose data it touches. Destructive actions are confirm cards the user taps; writes surface as action cards.</text>
 
   <!-- ================= Section 4: MCP access ================= -->
   <rect x="16" y="608" width="1008" height="160" rx="14" fill="#f4eefb" stroke="#e0d3f0"/>
-  <text x="34" y="634" font-size="13" font-weight="700" fill="#6b4ea8">4 · MCP access — let any agent use your recipes</text>
+  <text x="34" y="634" font-size="13" font-weight="700" fill="#6b4ea8">4 · MCP access — let any agent use your recipes (managed AgentCore Gateway)</text>
 
   <rect x="40" y="668" width="190" height="56" rx="8" fill="#fff" stroke="#6b4ea8" stroke-width="1.5"/>
   <text x="135" y="691" text-anchor="middle" font-size="14" font-weight="600" fill="#1a2a38">AI agent / MCP client</text>
-  <text x="135" y="708" text-anchor="middle" font-size="11" fill="#5b6b7a">Claude, IDEs, etc.</text>
+  <text x="135" y="708" text-anchor="middle" font-size="11" fill="#5b6b7a">Claude, Claude Code, etc.</text>
 
-  <rect x="340" y="668" width="240" height="56" rx="8" fill="#fff" stroke="#6b4ea8" stroke-width="1.7"/>
-  <text x="460" y="691" text-anchor="middle" font-size="14" font-weight="600" fill="#6b4ea8">MCP server</text>
-  <text x="460" y="708" text-anchor="middle" font-size="11" fill="#5b6b7a">mcp.mealr.recipes (Lambda)</text>
+  <rect x="320" y="668" width="280" height="56" rx="8" fill="#fff" stroke="#6b4ea8" stroke-width="1.7"/>
+  <text x="460" y="691" text-anchor="middle" font-size="14" font-weight="600" fill="#6b4ea8">Clients gateway (AgentCore)</text>
+  <text x="460" y="708" text-anchor="middle" font-size="11" fill="#5b6b7a">mcp.mealr.recipes · CloudFront + Lambda@Edge</text>
 
   <rect x="690" y="668" width="170" height="56" rx="8" fill="#fff" stroke="#6b4ea8" stroke-width="1.5"/>
   <text x="775" y="691" text-anchor="middle" font-size="14" font-weight="600" fill="#1a2a38">Mealr APIs</text>
   <text x="775" y="708" text-anchor="middle" font-size="11" fill="#5b6b7a">recipes · kb · shopping</text>
 
-  <line x1="230" y1="696" x2="338" y2="696" stroke="#5b6b7a" stroke-width="1.6" marker-end="url(#ar)"/>
-  <text x="284" y="688" text-anchor="middle" font-size="10" fill="#7a6b8a">OAuth 2.1 + Bearer</text>
-  <line x1="580" y1="696" x2="688" y2="696" stroke="#5b6b7a" stroke-width="1.6" marker-end="url(#ar)"/>
-  <text x="634" y="688" text-anchor="middle" font-size="10" fill="#7a6b8a">caller&#8217;s token</text>
+  <line x1="230" y1="696" x2="318" y2="696" stroke="#5b6b7a" stroke-width="1.6" marker-end="url(#ar)"/>
+  <text x="274" y="688" text-anchor="middle" font-size="10" fill="#7a6b8a">OAuth 2.1 + PKCE</text>
+  <line x1="600" y1="696" x2="688" y2="696" stroke="#5b6b7a" stroke-width="1.6" marker-end="url(#ar)"/>
+  <text x="644" y="688" text-anchor="middle" font-size="10" fill="#7a6b8a">caller&#8217;s token</text>
 
-  <text x="34" y="746" font-size="11" fill="#5b6b7a">14 tools (v2.0): 9 recipe tools incl. semantic_search_recipes (vector search) + 5 shopping-list tools incl. create/update actions.</text>
-  <text x="34" y="761" font-size="11" fill="#5b6b7a">Per-user OAuth 2.1 token forwarding; writes scoped to shopping lists.</text>
+  <text x="34" y="746" font-size="11" fill="#5b6b7a">Replaced the hand-written FastMCP server: tools are generated from the APIs&#8217; OpenAPI specs, so they can&#8217;t drift from the services.</text>
+  <text x="34" y="761" font-size="11" fill="#5b6b7a">Same interceptor as Ask; Cognito JWT inbound auth; read recipes, write shopping lists (never delete).</text>
 
   <!-- ================= Section 5: Insights (async agentic job) ================= -->
   <rect x="16" y="784" width="1008" height="180" rx="14" fill="#eef0fb" stroke="#d3d7f0"/>
@@ -154,7 +160,7 @@
   <!-- harness agent -->
   <rect x="214" y="856" width="180" height="56" rx="8" fill="#fff" stroke="#4a4eae" stroke-width="1.8"/>
   <text x="304" y="880" text-anchor="middle" font-size="14" font-weight="600" fill="#4a4eae">Harness agent</text>
-  <text x="304" y="896" text-anchor="middle" font-size="10" fill="#5b6b7a">AgentCore · Claude</text>
+  <text x="304" y="896" text-anchor="middle" font-size="10" fill="#5b6b7a">AgentCore · Claude Sonnet 5.5</text>
 
   <!-- inline tools -->
   <rect x="478" y="856" width="180" height="56" rx="8" fill="#e5e8f8" stroke="#4a4eae" stroke-width="1.5"/>
